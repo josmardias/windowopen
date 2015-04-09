@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <meta charset='utf-8' />
+  <meta charset="utf-8" />
   <title>Window Open Test</title>
   <style>
     #custom_html {
@@ -33,21 +33,21 @@
         event.preventDefault();
 
         var w;
-        w = window.open('', 'name', 'height=600,width=850');
-        w.document.write(document.getElementById('custom_html').value);
+        w = window.open("", "Test Window", "height=600,width=850");
+        w.document.write(document.getElementById("custom_html").value);
         w.document.close();
         w.focus();
       });
     }
 
     (function ready(fn) {
-      if (document.readyState != 'loading'){
+      if (document.readyState != "loading"){
         fn();
       } else if (document.addEventListener) {
-        document.addEventListener('DOMContentLoaded', fn);
+        document.addEventListener("DOMContentLoaded", fn);
       } else {
-        document.attachEvent('onreadystatechange', function() {
-          if (document.readyState != 'loading')
+        document.attachEvent("onreadystatechange", function() {
+          if (document.readyState != "loading")
             fn();
         });
       }
