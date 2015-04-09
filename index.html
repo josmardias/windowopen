@@ -19,9 +19,17 @@
   <br />
 
   <textarea id="custom_html">
-
-    <script src="test.js"></script>
-
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <script src="./relative.js"></script>
+      <script src="/relativeToRoot.js"></script>
+      <script src="http://local.somethingThatDoNotExists/test.js"></script>
+      <script src="http://127.0.0.1:10000/absolute.js"></script>
+    </head>
+    <body>
+      writed window content
+    </body>
   </textarea>
 
   <script>
