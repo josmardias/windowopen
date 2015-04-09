@@ -25,22 +25,23 @@
   </textarea>
 
   <script>
+    //detects IE
+    var _isIE;
+    function isIE() {
+      if (_isIE !== undefined) {
+        return _isIE;
+      }
 
-    function main (argument) {
-      var open_window_button = document.getElementById("open_window");
+      var userAgent = window.navigator.userAgent;
+      var msie = userAgent.indexOf("MSIE ");
 
-      open_window_button.addEventListener("click", function (event) {
-        event.preventDefault();
+      _isIE = msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./);
 
-        var w;
-        w = window.open("", "Test Window", "height=600,width=850");
-        w.document.write(document.getElementById("custom_html").value);
-        w.document.close();
-        w.focus();
-      });
+      return _isIE;
     }
 
-    (function ready(fn) {
+    // document ready IE8+ // YouMightNotNeedjQuery.com
+    function ready(fn) {
       if (document.readyState != "loading"){
         fn();
       } else if (document.addEventListener) {
@@ -51,7 +52,39 @@
             fn();
         });
       }
-    })(main);    
+    }
+
+    function main (baseUrl) {
+      var open_window_button = document.getElementById("open_window");
+
+      open_window_button.addEventListener("click", function (event) {
+        event.preventDefault();
+
+        var w;
+
+        w = window.open("", "Test Window", "height=600,width=850");
+
+        // prevent use parent location as base
+        // baseUrl must be absolute path on IE
+        w.document.write("<base href=\"" + baseUrl + "\" />");
+
+        w.document.write(document.getElementById("custom_html").value);
+        w.document.close();
+
+        w.focus();
+      });
+    }
+
+    ready(function () {
+      var newWindowUrl = "about:blank";
+
+      // ie needs absolute URL's
+      if (isIE()) {
+        newWindowUrl = "http://127.0.0.1:0";
+      }
+
+      main(newWindowUrl);
+    });
     
   </script>
 
