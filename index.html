@@ -88,6 +88,10 @@
 
       // ie needs absolute URL's
       if (isIE()) {
+        // not using DNS here, to resolve fast
+        // 127.0.0.1 is a loopback, will return faster
+        // :0 is a reserved port, nothing will be there
+        // this way, we have a very fast request for no where (avoid requesting real resource)
         newWindowUrl = "http://127.0.0.1:0";
       }
 
